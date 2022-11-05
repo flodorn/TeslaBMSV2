@@ -12,7 +12,7 @@
 #I tried sending "XX" followed by zeroes without success. Even changing the last "HV" to a space won't work, it has to be exactly this string
 	119:["BY", "D ", "Ba", "tt", "er", "y-", "Bo", "x ", "Pr", "em", "iu", "m ", "HV", 0, 0, 0]
 
-#if above reply was correct, the inverter will ask for registers 135-150, which is the battery size (5.0) and another number (3.16) unknown to me.
+#if above reply was correct, the inverter will ask for registers 135-150, which may be hardware/software version. not sure. 
 #both numbers are sent as strings. I tried sending 9.9 and it still worked, it doesn't seem to matter. 
 	135:["5.", "0", 0, 0, 0, 0, 0, 0, "3.", "16", 0, 0, 0, 0, 0, 0]
 
@@ -28,7 +28,7 @@
 	201:[0, 0, 11059, 10240, 10240, 2336, 1600, 13312, 10, 13312, 10, 0, 0]
 	
 #once above "handshake" has taken place, the inverter polls registers 301-324 periodically every 5 seconds.
-#these is the relevant data from the Battery. I will take the register apart to eplain in more detail
+#this is the relevant data from the Battery. I will take this register apart to eplain in more detail
 	301: 1		#unknown
 	302: 0		#unknown
 	303: 128	#? this seems to be a status. When I change this to 0 the inverter detects an error. 
