@@ -52,11 +52,13 @@
 	320: 0		#unknown
 	321: 13		#unknown
 	322: 52064	#unknown
-	323: 80		#unknown
+	323: 80		#? seems to always be a 1 digit number*10, so far I saw 80, 90, 60. Maybe a status?
 	324: 9900	#unknown
 
-#periodically the following registers are polled. Just answering with 0 works fine. 
+#periodically the registers 401-420 are polled. I'll answer with the contents  of 401-410 (see below) that I get from the write request. Works fine. 
 	401:[0]*20
+
+#periodically the following registers are polled. Just answering with 0 works fine
 	1001:[0]*100
 	12289:[0]*768
 
