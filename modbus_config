@@ -1,6 +1,6 @@
 #modbus settings for communication with Fronius Gen24
 
-#The Inverter polls every minute for register 101+102, if we reply correctly, it will move on to the next step. 
+#The Inverter polls every minute for register 101/102, if we reply correctly, it will move on to the next step. 
 #If we reply with something other than "SI" or 1, it won't move on
 	101: ["SI", 1]
 
@@ -16,14 +16,58 @@
 #both numbers are sent as strings. I tried sending 9.9 and it still worked, it doesn't seem to matter. 
 	135:["5.", "0", 0, 0, 0, 0, 0, 0, "3.", "16", 0, 0, 0, 0, 0, 0]
 
-#next it polls for registers 151-166 which is the BYD battery's serial number sent as a string. 
-151:["P0", "30", "T0", "20", "Z2", "00", "81", "03", "48", "80", "  ", "  ", 0, 0, 0, 0],
+#next it polls for registers 151-166 which appears to be the BYD battery's serial number sent as a string. 
+#I tried sending all zeroes and 151-163 spaces followed by zeroes and an actual serial no. It accepts everything, doesn't matter.
+	151:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	
+#next the inverter polls 167/168. Originally the sniffed BYD battery sent a 1/0, but 0/0 also works fine. Don't know what it stands for. 
+	167:[1, 0]
 
-167:[1, 0],
-201:[0, 0, 11059, 10240, 10240, 2336, 1600, 13312, 10, 13312, 10, 0, 0],
-301:[1, 0, 128, 470, 10948, 514, 0, 8352, 0, 0, 2058, 0, 60, 70, 0, 0, 16, 22741, 0, 0, 13, 52064, 80, 9900],
-401:[0]*20,
-1001:[0]*100,
-12289:[0]*768
+#next it askes for registers 201-213. I don't know what these stand for but just sending zeroes works as well. 
+#I left the original sniffed content.
+	201:[0, 0, 11059, 10240, 10240, 2336, 1600, 13312, 10, 13312, 10, 0, 0]
+	
+#once above "handshake" has taken place, the inverter polls registers 301-324 periodically every 5 seconds.
+#these is the relevant data from the Battery. I will take the register apart to eplain in more detail
+	301: 1		#unknown
+	302: 0		#unknown
+	303: 128	#? this seems to be a status. When I change this to 0 the inverter detects an error. 
+			#I only saw the numbers 128 and 144 so far, which makes me think it could be a multiple of 16 (128=8, 144=9)
+	304: 470	#State of charge /100 in % (4.7%). This  value is calculated based on the values of 305 and 306 (100/305*306=304)
+	305: 10948	#Total capacity of the battery in Wh (10948Wh or 10.948kWh)
+	306: 514	#Remaining capacity in Wh (514Wh or 0.514kWh)
+	307: 0		#unknown
+	308: 8352	#unknown
+	309: 0		#? Voltage output?
+	310: 0		#unknown
+	311: 2058	#Battery voltage /10 in V (205.8 V)
+	312: 0		#unknown
+	313: 60		#Minimum cell temperature /10 in °C (6°C)
+	314: 70		#Maximum cell temperature /10 in °C (7°C)
+	315: 0		#unknown
+	316: 0		#unknown
+	317: 16		#unknown
+	318: 22741	#unknown
+	319: 0		#unknown
+	320: 0		#unknown
+	321: 13		#unknown
+	322: 52064	#unknown
+	323: 80		#unknown
+	324: 9900	#unknown
+
+#periodically the following registers are polled. Just answering with 0 works fine. 
+	401:[0]*20
+	1001:[0]*100
+	12289:[0]*768
 
 
+#WRITE REQUESTS:
+#initially the inverter will ask to write something into registers 401-410. I let it and give it a "success" reply.
+#it is something along those lines:
+	401:[4608, 511, 0, 15360, 0, 97, 62846, 18688, 0, 1]
+
+#the inverter will then write into registers 401/401 periodically. I just let it and reply success, 
+#I don't know that the numbers stand for, but it always seems to be the same two numbers.
+	401:[4608, 511]
+	
+	
