@@ -1,11 +1,12 @@
 #modbus settings for communication with Fronius Gen24
 
 #The Inverter polls every minute for register 101+102, if we reply correctly, it will move on to the next step. If we reply with something other than "SI" or 1, it won't move on
-101: "SI"
-102: 1
+	101: "SI"
+	102: 1
 
+#if above reply was correct, the inverter will as for registers 103-118, which seems to be the battery vendor name. 
 
-103:["BY", "D", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+103:["LG", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 119:["BY", "D ", "Ba", "tt", "er", "y-", "Bo", "x ", "Pr", "em", "iu", "m ", "HV", 0, 0, 0],
 135:["5.", "0", 0, 0, 0, 0, 0, 0, "3.", "16", 0, 0, 0, 0, 0, 0],
 151:["P0", "30", "T0", "20", "Z2", "00", "81", "03", "48", "80", "  ", "  ", 0, 0, 0, 0],
