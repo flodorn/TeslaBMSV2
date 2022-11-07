@@ -382,7 +382,8 @@ void setup()
   /////////////////
 
 
-  //VE.begin(19200); //Victron VE direct bus
+  //SERIALSPARE.begin(9600); //open spare serial bus to Inverter
+  
 #if defined (__arm__) && defined (__SAM3X8E__)
   serialSpecialInit(USART0, 612500); //required for Due based boards as the stock core files don't support 612500 baud.
 #endif
