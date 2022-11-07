@@ -1,0 +1,22 @@
+
+
+const int ACUR2 = A0; 		// INPUT analog 			-	current 1
+const int ACUR1 = A1; 		// INPUT analog 			-	current 2
+const int IN1 = 17; 		// input 1 - high active	-	Key on/storage mode
+const int IN2 = 16; 		// input 2 - high active	-	LOW = Gen OFF HIGH=alternative limit - only EV mode?
+const int IN3 = 18; 		// input 3 - high active	-	AC present - only EV mode
+const int IN4 = 19; 		// input 4 - high active	-	Control pilot cond signal - future implementation
+
+const int OUT1 = 11;		// output 1 - high active 	- 	EV drive contactor 		(discharge enable)
+const int OUT2 = 12;		// output 2 - high active 	- 	EV precharge 			(shunt trip/main contactor)
+const int OUT3 = 20;		// output 3 - high active 	- 	EV charge relay 		(charge enable)
+const int OUT4 = 21;		// output 4 - high active 	- 	EV negative contactor 	(precharge)
+
+const int OUT5 = 22;  		// output 5 - Low active	- 	pwm driver output - only used for contactors without economizer
+const int OUT6 = 23;  		// output 6 - Low active	- 	pwm driver output - only used for contactors without economizer
+const int OUT7 = 5; 		// output 7 - Low active	- 	pwm driver output - only used for contactors without economizer
+const int OUT8 = 6;			// output 8 - Low active	- 	pwm driver output - gauge out
+const int led = 13;			// OUTPUT lED
+
+
+const int BMBfault = 11;	// conflict? used in other script
