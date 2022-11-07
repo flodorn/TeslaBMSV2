@@ -12,17 +12,20 @@ const int OUT2 = 12;		// output 2 - high active 	- 	EV precharge 			(shunt trip/
 const int OUT3 = 20;		// output 3 - high active 	- 	EV charge relay 		(charge enable)
 const int OUT4 = 21;		// output 4 - high active 	- 	EV negative contactor 	(precharge)
 
-const int OUT5 = 22;  		// output 5 - Low active	- 	pwm driver output - only used for contactors without economizer
-const int OUT6 = 23;  		// output 6 - Low active	- 	pwm driver output - only used for contactors without economizer
-const int OUT7 = 5; 		// output 7 - Low active	- 	pwm driver output - only used for contactors without economizer
+const int OUT5 = 22;		// output 5 - Low active	- 	pwm driver output - only used for contactors without economizer
+const int OUT6 = 23;		// output 6 - Low active	- 	pwm driver output - only used for contactors without economizer
+const int OUT7 = 5;			// output 7 - Low active	- 	pwm driver output - only used for contactors without economizer
 const int OUT8 = 6;			// output 8 - Low active	- 	pwm driver output - gauge out
 const int led = 13;			// OUTPUT lED
 
 serial1 RX = 0				// SPARESERIAL (standard pins, don't need to be defined)
 serial1 TX = 1				// SPARESERIAL (standard pins, don't need to be defined)
-serial2 RX = 9				// canSerial (standard pins, don't need to be defined)
-serial2 TX = 10				// canSerial (standard pins, don't need to be defined)
-serial1 RX = 7				// SERIALBMS (standard pins, don't need to be defined)
-serial1 TX = 8				// SERIALBMS (standard pins, don't need to be defined)
+serial2 RX = 9				// canSerial victron direct serial bus? (standard pins, don't need to be defined)
+serial2 TX = 10				// canSerial victron direct serial bus? (standard pins, don't need to be defined)
+serial3 RX = 7				// SERIALBMS (standard pins, don't need to be defined)
+serial3 TX = 8				// SERIALBMS (standard pins, don't need to be defined)
+
+CAN tx = 3					// CAN bus communication
+CAN rx = 4					// CAN bus communication
 
 const int BMBfault = 11;	// conflict? used in other script
