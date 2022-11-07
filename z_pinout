@@ -18,5 +18,11 @@ const int OUT7 = 5; 		// output 7 - Low active	- 	pwm driver output - only used 
 const int OUT8 = 6;			// output 8 - Low active	- 	pwm driver output - gauge out
 const int led = 13;			// OUTPUT lED
 
+serial1 RX = 0				// SPARESERIAL (standard pins, don't need to be defined)
+serial1 TX = 1				// SPARESERIAL (standard pins, don't need to be defined)
+serial2 RX = 9				// canSerial (standard pins, don't need to be defined)
+serial2 TX = 10				// canSerial (standard pins, don't need to be defined)
+serial1 RX = 7				// SERIALBMS (standard pins, don't need to be defined)
+serial1 TX = 8				// SERIALBMS (standard pins, don't need to be defined)
 
 const int BMBfault = 11;	// conflict? used in other script
