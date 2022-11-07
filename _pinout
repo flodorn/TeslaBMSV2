@@ -1,0 +1,15 @@
+  //pinMode(ACUR1, INPUT);//Not required for Analogue Pins
+  //pinMode(ACUR2, INPUT);//Not required for Analogue Pins
+  pinMode(IN1, INPUT);
+  pinMode(IN2, INPUT);
+  pinMode(IN3, INPUT);
+  pinMode(IN4, INPUT);
+  pinMode(OUT1, OUTPUT); // drive contactor
+  pinMode(OUT2, OUTPUT); // precharge
+  pinMode(OUT3, OUTPUT); // charge relay
+  pinMode(OUT4, OUTPUT); // Negative contactor
+  pinMode(OUT5, OUTPUT); // pwm driver output
+  pinMode(OUT6, OUTPUT); // pwm driver output
+  pinMode(OUT7, OUTPUT); // pwm driver output
+  pinMode(OUT8, OUTPUT); // pwm driver output
+  pinMode(led, OUTPUT);
