@@ -10,6 +10,11 @@
 //Serial3 for teensy
 #define SERIALBMS  Serial3
 
+
+// victron serial VE direct bus config
+#define SERIALSPARE Serial1
+
+
 // victron serial VE direct bus config
 #define canSerial Serial2
 
