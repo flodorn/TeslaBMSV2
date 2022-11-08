@@ -29,10 +29,34 @@
 	
 #once above "handshake" has taken place, the inverter polls registers 301-324 periodically every 5 seconds.
 #this is the relevant data from the Battery. I will take this register apart to eplain in more detail
-	301: 1		#unknown
+	301: 1		#unknown: changning this to 0 or 2 doesn't change anything. 
 	302: 0		#unknown
-	303: 128	#? this seems to be a status. When I change this to 0 the inverter detects an error. 
-			#I only saw the numbers 128 and 144 so far, which makes me think it could be a multiple of 16 (128=8, 144=9)
+	303: 128	#seems to be a status. In the logs I only saw the numbers 128 and 144 so far, which makes me think it could be a multiple of 16 (128=8, 144=9)
+			#When I change this to 0 the inverter goes to "energy saving" mode, 
+			#32 status "energy saving"
+			#64 status "energy saving"
+			#80 status "energy saving"
+			#96 status "energy saving"
+			#100 status "energy saving"
+			#112 status "energy saving"
+			#120 status "energy saving"
+			#127 status "energy saving"
+			#128 status "deactivated" (8*16)
+			#144 status "deactivated" (9*16)
+			#150 status "deactivated" 
+			#160 status "deactivated" (10*16)
+			#176 status "deactivated" (11*16)
+			#177 status "deactivated"
+			#185 status "deactivated"
+			#190 status "deactivated"
+			#191 status "deactivated"
+			#192 status "energy saving"
+			#256 status "energy saving"
+			#272 status "energy saving"
+			#300 status "energy saving"
+			#320 status "energy saving"
+			#512 status "energy saving"
+			#1280 status "energy saving"
 	304: 470	#State of charge /100 in % (4.7%). This  value is calculated based on the values of 305 and 306 (100/305*306=304)
 	305: 10948	#Total capacity of the battery in Wh (10948Wh or 10.948kWh)
 	306: 514	#Remaining capacity in Wh (514Wh or 0.514kWh)
@@ -52,7 +76,8 @@
 	320: 0		#unknown
 	321: 13		#unknown
 	322: 52064	#unknown
-	323: 80		#? seems to always be a 1 digit number*10, so far I saw 80, 90, 60. Maybe a status?
+	323: 80		#80=battery discharging, 90=battery CHARGING, 70=discharging, 60=discharging, 0=discharging, 100=discharging
+			## works only if battery is not in "energy saving" mode
 	324: 9900	#unknown
 
 #periodically the registers 401-420 are polled. I'll answer with the contents  of 401-410 (see below) that I get from the write request. Works fine. 
