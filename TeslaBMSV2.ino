@@ -102,6 +102,7 @@ byte bmsstatus = 0;
 #define Victron 5
 #define Coda 6
 #define VictronHV 7
+#define Fronius 8
 //
 
 
@@ -968,7 +969,10 @@ void loop()
     }
     updateSOC();
     currentlimit();
-    VEcan();
+    if (settings.chargertype == Victron || settings.chargertype == VictronHV)
+      {
+        VEcan();
+      }
 
     if (settings.ESSmode == 1 && settings.ChargerDirect == 0 && CanOnRev == true)
     {
@@ -2812,6 +2816,9 @@ void menu()
           case 7:
             SERIALCONSOLE.print("Victron HV Spec");
             break;
+          case 8:
+            SERIALCONSOLE.print("Fronius");
+            break;
         }
         SERIALCONSOLE.println();
         if (settings.chargertype > 0)
@@ -3838,7 +3845,11 @@ void balancing()
 
 void chargercomms()
 {
-
+  if (settings.chargertype == Fronius)
+  {
+    
+  }
+  
   if (settings.chargertype == Elcon)
   {
     msg.id  =  0x1806E5F4; //broadcast to all Elteks
