@@ -12,7 +12,7 @@
 #I tried sending "XX" followed by zeroes without success. Even changing the last "HV" to a space won't work, it has to be exactly this string
 	119:["BY", "D ", "Ba", "tt", "er", "y-", "Bo", "x ", "Pr", "em", "iu", "m ", "HV", 0, 0, 0]
 
-#if above reply was correct, the inverter will ask for registers 135-150, which may be hardware/software version. not sure. 
+#if above reply was correct, the inverter will ask for registers 135-150, which is hardware/software/firmware versions. 
 #both numbers are sent as strings. I tried sending 9.9 and it still worked, it doesn't seem to matter. 
 	135:["5.", "0", 0, 0, 0, 0, 0, 0, "3.", "16", 0, 0, 0, 0, 0, 0]
 
