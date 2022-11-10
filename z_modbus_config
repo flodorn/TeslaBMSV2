@@ -23,9 +23,21 @@
 #next the inverter polls 167/168. Originally the sniffed BYD battery sent a 1/0, but 0/0 also works fine. Don't know what it stands for. 
 	167:[1, 0]
 
-#next it askes for registers 201-213. I don't know what these stand for but just sending zeroes works as well. 
-#I left the original sniffed content.
-	201:[0, 0, 11059, 10240, 10240, 2336, 1600, 13312, 10, 13312, 10, 0, 0]
+#next it askes for registers 201-213. Full credit to Per for decoding the 200 range:
+	201: 0		#unknown
+	202: 0		#unknown
+	203: 11059 	#Usable Energy=11.059kWh
+	204: 10240 	#Rated Power=10.24kW (10240W/204.8V=50A)...204.8V is nominalvoltage
+	205: 10240 	#Max Charge/Discharge Power=10.24kW
+	206: 2335	#Max Voltage (233.5V)
+	207: 1600	#Min Voltage (160.0V)
+	208: 13312	#Peak (dis)charge Power?
+	209: 10		#unknown
+	210: 13312	#Peak (dis)charge Power?
+	211: 10:	#unknown
+	212: 0		#unknown
+	213: 0		#unknown
+	
 	
 #once above "handshake" has taken place, the inverter polls registers 301-324 periodically every 5 seconds.
 #this is the relevant data from the Battery. I will take this register apart to eplain in more detail
@@ -76,8 +88,7 @@
 	320: 0		#unknown
 	321: 13		#unknown
 	322: 52064	#unknown
-	323: 80		#80=battery discharging, 90=battery CHARGING, 70=discharging, 60=discharging, 0=discharging, 100=discharging
-			## works only if battery is not in "energy saving" mode
+	323: 80		#unknown
 	324: 9900	#unknown
 
 #periodically the registers 401-420 are polled. I'll answer with the contents  of 401-410 (see below) that I get from the write request. Works fine. 
