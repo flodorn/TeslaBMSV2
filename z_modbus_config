@@ -41,41 +41,24 @@
 	
 #once above "handshake" has taken place, the inverter polls registers 301-324 periodically every 5 seconds.
 #this is the relevant data from the Battery. I will take this register apart to eplain in more detail
-	301: 1		#unknown: changning this to 0 or 2 doesn't change anything. 
+	301: 1		#this is a status/mode. It has to be 3 for charging/discharging. if at 0 or 1 the inverter goes to mode "start"
 	302: 0		#unknown
-	303: 128	#seems to be a status. In the logs I only saw the numbers 128 and 144 so far, which makes me think it could be a multiple of 16 (128=8, 144=9)
-			#When I change this to 0 the inverter goes to "energy saving" mode, 
-			#32 status "energy saving"
-			#64 status "energy saving"
-			#80 status "energy saving"
-			#96 status "energy saving"
-			#100 status "energy saving"
-			#112 status "energy saving"
-			#120 status "energy saving"
-			#127 status "energy saving"
-			#128 status "deactivated" (8*16)
-			#144 status "deactivated" (9*16)
-			#150 status "deactivated" 
-			#160 status "deactivated" (10*16)
-			#176 status "deactivated" (11*16)
-			#177 status "deactivated"
-			#185 status "deactivated"
-			#190 status "deactivated"
-			#191 status "deactivated"
-			#192 status "energy saving"
-			#256 status "energy saving"
-			#272 status "energy saving"
-			#300 status "energy saving"
-			#320 status "energy saving"
-			#512 status "energy saving"
-			#1280 status "energy saving"
+	303: 128	#Opertion mode. In the logs I only saw the numbers 128 and 144 so far, which makes me think it could be a 
+			#multiple of 16 (128=8, 144=9). When I change this to any of the numbers 32,64,80,96,100,112,120,127,192,256,281,
+			#300,320,512,1280 the inverter goes to "energy saving" mode, which is an error state
+			#128 normal status for charging/discharging (8*16)
+			#144 inverter goes to mode "Forced re-charging" (9*16)
+			#160 inverter goes to mode "Calibration" (10*16)
+			#176 inverter goes to mode "" (11*16)
 	304: 470	#State of charge /100 in % (4.7%). This  value is calculated based on the values of 305 and 306 (100/305*306=304)
+			#Based on the inverter settings and available energy, the inverter will decide to charge/discharge by itself.
 	305: 10948	#Total capacity of the battery in Wh (10948Wh or 10.948kWh)
 	306: 514	#Remaining capacity in Wh (514Wh or 0.514kWh)
-	307: 0		#unknown
-	308: 8352	#unknown
-	309: 0		#? Voltage output?
-	310: 0		#unknown
+	307: 2000	#max. discharging power in W (200W)
+	308: 8352	#max. charging power in W (8.352kW)
+	309: 2000	#not sure yet. if at 0 it will throw an error and not charge. anything above 0 seems to work. further experimenting needed.
+	310: 2000	#measured charing/discharging Voltage by battery in V (200V). If this is 0 it won't charge/discharge. If it's something 
+			#unrealistic it will throw an error after a few minutes of charging. leaving it at 200V worked fine for me.
 	311: 2058	#Battery voltage /10 in V (205.8 V)
 	312: 0		#unknown
 	313: 60		#Minimum cell temperature /10 in °C (6°C)
@@ -109,3 +92,7 @@
 	401:[4608, 511]
 	
 	
+
+Additional info:
+When the script (modbus communication) is stopped for more than 10 seconds, the battery will grey out and not available anymore.
+
