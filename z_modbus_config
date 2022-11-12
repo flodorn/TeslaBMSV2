@@ -54,7 +54,7 @@
 			#Based on the inverter settings and available energy, the inverter will decide to charge/discharge by itself.
 	305: 10948	#Total capacity of the battery in Wh (10948Wh or 10.948kWh)
 	306: 514	#Remaining capacity in Wh (514Wh or 0.514kWh)
-	307: 2000	#max. discharging power in W (200W)
+	307: 200	#max. discharging power in W (200W)
 	308: 8352	#max. charging power in W (8.352kW)
 	309: 2000	#not sure yet. if at 0 it will throw an error and not charge. anything above 0 seems to work. further experimenting needed.
 	310: 2000	#measured charing/discharging Voltage by battery in V (200V). If this is 0 it won't charge/discharge. If it's something 
@@ -94,5 +94,5 @@
 	
 
 Additional info:
-When the script (modbus communication) is stopped for more than 10 seconds, the battery will grey out and not available anymore.
+When the script (modbus communication) is stopped for more than 10 seconds, the battery will grey out and is not available anymore.
 
